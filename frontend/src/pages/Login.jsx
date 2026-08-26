@@ -15,8 +15,14 @@ export default function Login() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    const res = await login(data);
-    console.log(res);
+
+    try {
+      const res = await login(data);
+      console.log(res);
+      alert('Login exitoso');
+    } catch (error) {
+      alert('Error en el login.');
+    }
   }
 
   function cancelHandler() {
