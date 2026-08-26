@@ -4,10 +4,12 @@ import Form from '../components/Form';
 import TextField from '../components/TextField';
 import SecretField from '../components/SecretField';
 import useLogin from '../services/useLogin';
+import useApi from '../services/useApi';
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useLogin();
+  const { setAuthorization } = useApi();
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -18,7 +20,8 @@ export default function Login() {
 
     try {
       const res = await login(data);
-      console.log(res);
+      console.log(res.authorizationToken);
+      setAuthorization('Bearer ' + res.authorizationToken);
       alert('Login exitoso');
     } catch (error) {
       alert('Error en el login.');
