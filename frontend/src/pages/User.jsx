@@ -15,6 +15,12 @@ export default function User() {
 
   function submitHandler(e) {
     e.preventDefault();
+
+    if (!data.email.includes('@')) {
+      alert('El correo electrónico no es válido');
+      return;
+    }
+
     console.log(data);
   }
 
