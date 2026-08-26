@@ -21,6 +21,7 @@
   "homepage": "https://github.com/fabianlucena/da-2026#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "mongoose": "^9.6.2"
   },
