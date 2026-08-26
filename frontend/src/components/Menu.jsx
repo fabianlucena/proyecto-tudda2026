@@ -1,9 +1,12 @@
 import MenuItem from './MenuItem';
 
-export default function Menu() {
+export default function Menu({
+  visible = true
+}) {
   return <nav
     style={{
       backgroundColor: 'lightblue',
+      display: visible ? '' : 'none',
     }}
   >
     <MenuItem to="/">Inicio</MenuItem>
