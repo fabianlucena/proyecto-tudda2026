@@ -24,6 +24,7 @@ export default function Login() {
       setAuthorization('Bearer ' + res.authorizationToken);
       alert('Login exitoso');
     } catch (error) {
+      console.error(error);
       alert('Error en el login.');
     }
   }
