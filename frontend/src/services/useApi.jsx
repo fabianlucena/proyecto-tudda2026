@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, createContext, useContext } from 'react';
 
-export default function useApi() {
-  const [urlBase /*, setUrlBase */] = useState('http://localhost:3000/api');
+// oxlint-disable-next-line react/only-export-components
+export const ApiContext = createContext();
+
+export function ApiProvider({ children }) {
+  const [urlBase, setUrlBase] = useState('http://localhost:3000/api');
   const [authorization, setAuthorization] = useState('');
 
   async function request(url, options) {
@@ -54,10 +57,21 @@ export default function useApi() {
     });
   }
 
-  return {
-    post,
-    postJson,
-    authorization,
-    setAuthorization,
-  }
+  return <ApiContext.Provider
+    value={{
+      urlBase,
+      setUrlBase,
+      authorization,
+      setAuthorization,
+      post,
+      postJson,
+    }}
+  >
+    {children}
+  </ApiContext.Provider>;
+}
+
+// oxlint-disable-next-line react/only-export-components
+export default function useApi() {
+  return useContext(ApiContext);
 }

@@ -22,7 +22,6 @@ export default function Login() {
 
     try {
       const res = await login(data);
-      console.log(res.authorizationToken);
       setAuthorization('Bearer ' + res.authorizationToken);
       alert('Login exitoso');
     } catch (error) {
