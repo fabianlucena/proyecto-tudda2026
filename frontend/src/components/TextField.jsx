@@ -4,7 +4,8 @@ export default function TextField({
   label,
   value,
   onChange,
-  required = false
+  required = false,
+  disabled = false
 }) {
   return <Field
     label={label}
@@ -15,6 +16,7 @@ export default function TextField({
       value={value}
       required={required}
       onInput={(e) => onChange?.(e.target.value)}
+      disabled={disabled}
     />
   </Field>;
 }
