@@ -57,6 +57,14 @@ export function ApiProvider({ children }) {
     });
   }
 
+  async function getJson(url, options = {}) {
+    return await request(url, {
+      method: 'GET',
+      json: true,
+      ...options,
+    });
+  }
+
   return <ApiContext.Provider
     value={{
       urlBase,
@@ -65,6 +73,7 @@ export function ApiProvider({ children }) {
       setAuthorization,
       post,
       postJson,
+      getJson,
     }}
   >
     {children}

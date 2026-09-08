@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
-import User from './pages/User';
+import Users from './pages/Users';
 
 const routes = [
   {
@@ -26,8 +26,8 @@ const routes = [
         element: <Login />,
       },
       {
-        path: '/user',
-        element: <User />,
+        path: '/users',
+        element: <Users />,
       },
       {
         path: '*',
