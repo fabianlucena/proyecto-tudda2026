@@ -12,7 +12,7 @@ export default function Users() {
     }
 
     fetchData();
-  }, []);
+  }, [getUsers]);
 
   return <div>
     <h6>
@@ -20,7 +20,7 @@ export default function Users() {
     </h6>
 
     <table
-      className="table"
+      className="data-table"
     >
       <thead>
         <tr>
@@ -28,6 +28,7 @@ export default function Users() {
           <th>Nombre completo</th>
           <th>Email</th>
           <th>Rol</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +38,14 @@ export default function Users() {
             <td>{row.displayName}</td>
             <td>{row.email}</td>
             <td>{row.role}</td>
+            <td>
+              <button>
+                Eliminar
+              </button>
+              <button>
+                Modificar
+              </button>
+            </td>
           </tr>)
         }
       </tbody>

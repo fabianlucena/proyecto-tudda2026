@@ -37,3 +37,26 @@ input[type=submit]:hover {
   background-color: lightblue;
   transition: .35s;
 }
+
+.data-table {
+  width: 100%;
+  border: .025em solid grey;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  border: .025em solid grey;
+}
+
+.data-table tr {
+  background-color: rgb(181, 217, 247);
+}
+
+.data-table tr:nth-child(even) {
+  background-color: rgb(171, 255, 213);
+}
+
+.data-table tbody tr:hover {
+  background-color: rgb(255, 234, 177);
+}
