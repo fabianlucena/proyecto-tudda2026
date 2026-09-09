@@ -5,11 +5,13 @@ import TextField from '../components/TextField';
 import SecretField from '../components/SecretField';
 import useLogin from '../services/useLogin';
 import useApi from '../services/useApi';
+import useGlobal from '../services/useGlobal';
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useLogin();
   const { setAuthorization } = useApi();
+  const { setUsername, setRole } = useGlobal();
   const [disabled, setDisabled] = useState(false);
   const [data, setData] = useState({
     username: '',
@@ -23,7 +25,8 @@ export default function Login() {
     try {
       const res = await login(data);
       setAuthorization('Bearer ' + res.authorizationToken);
-      alert('Login exitoso');
+      setUsername(res.username);
+      setRole(res.role);
     } catch (error) {
       console.error(error);
       alert('Error en el login.');

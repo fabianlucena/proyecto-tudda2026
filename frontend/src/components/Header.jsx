@@ -1,6 +1,10 @@
+import useGlobal from '../services/useGlobal';
+
 export default function Header({
   onClickMenu
 }) {
+  const { username } = useGlobal();
+
   return <header
     style={{
       backgroundColor: 'pink',
@@ -13,5 +17,6 @@ export default function Header({
       onClick={() => onClickMenu()}
     />
     Acá va el título de la página
+    {username && <span>Bienvenido: {username}</span>}
   </header>;
 }
