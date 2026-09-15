@@ -49,6 +49,8 @@ export default function User() {
   return <Form
     title={username ? `Modificando usuario: ${username}` : "Agregar usuario"}
     onSubmit={submitHandler}
+    submitLabel={username ? "Modificar" : "Agregar"}
+    onCancel={() => navigate('/users')}
   >
     <TextField
       label="Nombre de usuario:"
