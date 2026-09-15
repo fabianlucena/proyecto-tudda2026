@@ -25,6 +25,7 @@ export default function Login() {
 
     try {
       const res = await login(data);
+      localStorage.setItem('session', JSON.stringify(res));
       setAuthorization('Bearer ' + res.authorizationToken);
       setUsername(res.username);
       setRole(res.role);

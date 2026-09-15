@@ -12,7 +12,7 @@ export default function Users() {
     }
 
     fetchData();
-  }, [getUsers]);
+  }, []);
 
   return <div>
     <h6>

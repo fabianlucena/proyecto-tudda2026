@@ -7,6 +7,11 @@ export default function Menu({
   const { role, username } = useGlobal();
   const isAdmin = role === 'admin';
 
+  function logout() {
+    localStorage.removeItem('session');
+    window.location.href = '/';
+  }
+
   return <nav
     style={{
       backgroundColor: 'lightblue',
@@ -16,6 +21,7 @@ export default function Menu({
     <MenuItem to="/">Inicio</MenuItem>
     {!username && <MenuItem to="/login">Login</MenuItem>}
     {isAdmin && <MenuItem to="/users">Usuarios</MenuItem>}
+    {username && <MenuItem onClick={logout}>Salir</MenuItem>}
     <MenuItem to="/about">Acerca de</MenuItem>
   </nav>;
 }
