@@ -6,6 +6,7 @@ import SecretField from '../components/SecretField';
 import useLogin from '../services/useLogin';
 import useApi from '../services/useApi';
 import useGlobal from '../services/useGlobal';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,9 +28,10 @@ export default function Login() {
       setAuthorization('Bearer ' + res.authorizationToken);
       setUsername(res.username);
       setRole(res.role);
+      toast.success('Sesión iniciada correctamente.');
     } catch (error) {
       console.error(error);
-      alert('Error en el login.');
+      toast.error('Error en el login.');
     }
 
     setDisabled(false);
