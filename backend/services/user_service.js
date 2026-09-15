@@ -34,4 +34,26 @@ export class UserService {
 
     return this.userRepo.create(user);
   }
+
+  async delete(username) {
+    const user = await this.userRepo.findOne({ username });
+    if (!user)
+      throw new Error('El usuario no existe');
+
+    await this.userRepo.deleteOne({ username });
+  }
+
+  async update(username, userData) {
+    const user = await this.userRepo.findOne({ username });
+    if (!user)
+      throw new Error('El usuario no existe');
+
+    if (userData.password) {
+      if (userData.password === '1234')
+        throw new Error('La contraseña no puede ser 1234');
+      userData.password = await bcrypt.hash(userData.password, 10);
+    }
+
+    return this.userRepo.updateOne({ username }, userData);
+  }
 }

@@ -5,5 +5,9 @@ export default function useUser() {
 
   return {
     getUsers: (options) => api.getJson('/users', options),
+    getUser: (username, options) => api.getJson(`/users/${username}`, options),
+    deleteUser: (username, options) => api.deleteJson(`/users/${username}`, options),
+    updateUser: (username, data, options) => api.patchJson(`/users/${username}`, data, options),
+    addUser: (data, options) => api.postJson('/users', data, options),
   }
 }

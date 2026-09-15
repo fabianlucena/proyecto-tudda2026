@@ -1,23 +1,67 @@
 import { useState, useEffect } from 'react';
 import useUser from '../services/useUser';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export default function Users() {
-  const { getUsers } = useUser();
+  const navigate = useNavigate();
+  const { getUsers, deleteUser } = useUser();
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await getUsers();
-      setList(res);
-    }
+  async function loadList() {
+    const res = await getUsers();
+    setList(res);
+  }
 
-    fetchData();
+  useEffect(() => {
+    loadList();
+  // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const eliminarUsuario = async (username) => {
+    const result = await Swal.fire({
+      title: 'Confirmar la eliminación del usuario',
+      text: 'Esta acción elimina el usuario y no se podrá revertir.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
+      await deleteUser(username);
+      await loadList();
+    }
+  };
+
   return <div>
-    <h6>
-      Usuarios
-    </h6>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}
+    >
+      <h4>
+        Usuarios
+      </h4>
+
+      <div>
+        <button
+          onClick={() => navigate('/users/new')}
+        >
+          Agregar
+        </button>
+
+        <button
+          onClick={() => loadList()}
+        >
+          Actualizar
+        </button>
+      </div>
+    </div>
 
     <table
       className="data-table"
@@ -39,10 +83,14 @@ export default function Users() {
             <td>{row.email}</td>
             <td>{row.role}</td>
             <td>
-              <button>
+              <button
+                onClick={() => eliminarUsuario(row.username)}
+              >
                 Eliminar
               </button>
-              <button>
+              <button
+                onClick={() => navigate(`/users/${row.username}/edit`)}
+              >
                 Modificar
               </button>
             </td>

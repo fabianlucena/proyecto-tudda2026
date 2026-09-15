@@ -5,6 +5,7 @@ import About from './pages/About';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Users from './pages/Users';
+import User from './pages/User';
 
 const routes = [
   {
@@ -28,6 +29,14 @@ const routes = [
       {
         path: '/users',
         element: <Users />,
+      },
+      {
+        path: '/users/new',
+        element: <User />,
+      },
+      {
+        path: '/users/:username/edit',
+        element: <User />,
       },
       {
         path: '*',

@@ -1,10 +1,19 @@
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Form from '../components/Form';
 import TextField from '../components/TextField';
 import SecretField from '../components/SecretField';
 import SelectField from '../components/SelectField';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import useUser from '../services/useUser';
+import { useNavigate } from 'react-router-dom';
 
 export default function User() {
+  const { username } = useParams();
+  const { getUser, updateUser, addUser } = useUser();
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     username: '',
     displayName: '',
@@ -13,7 +22,14 @@ export default function User() {
     role: 'user',
   });
 
-  function submitHandler(e) {
+  useEffect(() => {
+    getUser(username)
+      .then(userData => setData(userData))
+      .catch(err => toast.error(err?.message || 'Error al cargar los datos del usuario'));
+  // oxlint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
+
+  async function submitHandler(e) {
     e.preventDefault();
 
     if (!data.email.includes('@')) {
@@ -21,11 +37,17 @@ export default function User() {
       return;
     }
 
-    console.log(data);
+    if (username)
+      await updateUser(username, data);
+    else
+      await addUser(data);
+
+    toast.success(`Usuario ${username ? 'modificado' : 'agregado'} correctamente`);
+    navigate('/users');
   }
 
   return <Form
-    title="Agregar usuario"
+    title={username ? `Modificando usuario: ${username}` : "Agregar usuario"}
     onSubmit={submitHandler}
   >
     <TextField
@@ -50,7 +72,7 @@ export default function User() {
       label="Contraseña:"
       value={data.password}
       onChange={newValue => setData(data => ({ ...data, password: newValue }))}
-      required
+      required={!username}
     />
     <SelectField
       label="Rol:"

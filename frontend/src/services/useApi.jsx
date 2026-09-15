@@ -65,6 +65,23 @@ export function ApiProvider({ children }) {
     });
   }
 
+  async function deleteJson(url, options = {}) {
+    return await request(url, {
+      method: 'DELETE',
+      json: true,
+      ...options,
+    });
+  }
+
+  async function patchJson(url, body, options = {}) {
+    return await request(url, {
+      method: 'PATCH',
+      body,
+      json: true,
+      ...options,
+    });
+  }
+
   return <ApiContext.Provider
     value={{
       urlBase,
@@ -74,6 +91,8 @@ export function ApiProvider({ children }) {
       post,
       postJson,
       getJson,
+      deleteJson,
+      patchJson,
     }}
   >
     {children}
