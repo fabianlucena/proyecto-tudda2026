@@ -29,6 +29,7 @@ export default function Login() {
       setUsername(res.username);
       setRole(res.role);
       toast.success('Sesión iniciada correctamente.');
+      navigate('/');
     } catch (error) {
       console.error(error);
       toast.error('Error en el login.');
