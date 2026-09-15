@@ -15,7 +15,7 @@ export default function Menu({
   >
     <MenuItem to="/">Inicio</MenuItem>
     {!username && <MenuItem to="/login">Login</MenuItem>}
-    <MenuItem to="/about">Acerca de</MenuItem>
     {isAdmin && <MenuItem to="/users">Usuarios</MenuItem>}
+    <MenuItem to="/about">Acerca de</MenuItem>
   </nav>;
 }
