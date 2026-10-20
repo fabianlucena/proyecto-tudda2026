@@ -1,11 +1,17 @@
-import { Text, View } from 'react-native';
+
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native';
+import styles from '../styles';
 
 export default function Screen({
   children,
   title,
 }) {
-  return <View>
-    {title && <Text>{title}</Text> || null}
+  return <SafeAreaView
+    style={styles.screen}
+  >
+    {title && <Text style={styles.title}>{title}</Text> || null}
     {children}
-  </View>;
+  </SafeAreaView>;
 }
