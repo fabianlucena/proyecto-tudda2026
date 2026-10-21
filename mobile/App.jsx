@@ -1,10 +1,13 @@
 
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Login from './screens/Login';
+import { NavigationContainer } from '@react-navigation/native';
+import Router from './Router';
 
 export default function App() {
   return <SafeAreaProvider>
-    <Login />
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   </SafeAreaProvider>;
 }
